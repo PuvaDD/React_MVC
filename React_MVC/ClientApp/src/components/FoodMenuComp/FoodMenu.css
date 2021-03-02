@@ -1,0 +1,90 @@
+﻿.menu-div {
+    background-color: white;
+}
+
+.menu-div-inner {
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.menu-food-type {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3, max-content) !important;
+    padding: 2%;
+    border-bottom: 2px solid black;
+    border-radius: 0px;
+    background-color: white;
+    grid-gap: 5%;
+    place-content: center;
+}
+
+.food-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1%;
+    padding: 2%;
+}
+
+.food-item-panel {
+    box-sizing: border-box;
+    display: grid;
+    place-content: center;
+    background-color: #f9faf6;
+}
+
+.food-item-info {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    padding-left: 3%;
+}
+
+.panel-image {
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    grid-gap: 5%;
+    place-content: center;
+}
+
+.food-item-name {
+    font-size: large;
+    text-align: center;
+}
+
+.food-item-div {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    padding: 4%;
+}
+
+.rs-panel-body {
+    padding: 0px;
+}
+
+.food-item-price {
+    padding-left: 15% !important;
+    padding-right: 15% !important;
+    margin-left: 25%;
+    border: 1px solid #c1a048;
+    border-radius: 5px;
+    background-color: #c1a048;
+    color: white;
+}
+
+.food-item-divider {
+    margin-bottom: 10px;
+    margin-top: 20px
+}
+
+.food-name {
+    text-align: center;
+}
+
+.ctg-element:hover {
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+}

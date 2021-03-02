@@ -1,0 +1,25 @@
+﻿.header-div {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.signin-btn {
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border: 1.8px solid rgb(116, 113, 113);
+    border-radius: 5px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(100, 96, 96);
+    height: 40px;
+    width: 120px;
+    top: 30%;
+}
+
+.signin-btn:hover {
+    background-color: rgb(243, 243, 243)
+}
+
+

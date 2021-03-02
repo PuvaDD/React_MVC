@@ -1,0 +1,17 @@
+{
+  "short_name": "React_MVC",
+  "name": "React_MVC",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose":  "maskable any"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation" :  "portrait"  // also can use landscape
+}
