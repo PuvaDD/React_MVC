@@ -20,27 +20,27 @@ namespace React_MVC.Controllers
             List<Food> food_2 = new List<Food>();
             List<Food> food_3 = new List<Food>();
 
-            food_1.Add(new Food() { Id = 100, Name = "FastFood_1", Price = 10 } );
-            food_1.Add(new Food() { Id = 101, Name = "FastFood_2", Price = 20 } );
-            food_1.Add(new Food() { Id = 102, Name = "FastFood_3", Price = 30 } );
-            food_1.Add(new Food() { Id = 103, Name = "FastFood_4", Price = 40 } );
-            food_1.Add(new Food() { Id = 104, Name = "FastFood_5", Price = 50 } );
+            food_1.Add(new Food() { Id = 100, Catagory = "FastFood", Name = "FastFood_1", Price = 10000, Quantity = 0 });
+            food_1.Add(new Food() { Id = 101, Catagory = "FastFood", Name = "FastFood_2", Price = 20000, Quantity = 0 });
+            food_1.Add(new Food() { Id = 102, Catagory = "FastFood", Name = "FastFood_3", Price = 30000, Quantity = 0 });
+            food_1.Add(new Food() { Id = 103, Catagory = "FastFood", Name = "FastFood_4", Price = 40000, Quantity = 0 });
+            food_1.Add(new Food() { Id = 104, Catagory = "FastFood", Name = "FastFood_5", Price = 50000, Quantity = 0 });
 
-            food_2.Add(new Food() { Id = 100, Name = "Classic_1", Price = 10 });
-            food_2.Add(new Food() { Id = 101, Name = "Classic_2", Price = 20 });
-            food_2.Add(new Food() { Id = 102, Name = "Classic_3", Price = 30 });
-            food_2.Add(new Food() { Id = 103, Name = "Classic_4", Price = 40 });
-            food_2.Add(new Food() { Id = 104, Name = "Classic_5", Price = 50 });
+            food_2.Add(new Food() { Id = 105, Catagory = "Classic", Name = "Classic_1", Price = 10000, Quantity = 0 });
+            food_2.Add(new Food() { Id = 106, Catagory = "Classic", Name = "Classic_2", Price = 20000, Quantity = 0 });
+            food_2.Add(new Food() { Id = 107, Catagory = "Classic", Name = "Classic_3", Price = 30000, Quantity = 0 });
+            food_2.Add(new Food() { Id = 108, Catagory = "Classic", Name = "Classic_4", Price = 40000, Quantity = 0 });
+            food_2.Add(new Food() { Id = 109, Catagory = "Classic", Name = "Classic_5", Price = 50000, Quantity = 0 });
 
-            food_3.Add(new Food() { Id = 100, Name = "Drink_1", Price = 10 });
-            food_3.Add(new Food() { Id = 101, Name = "Drink_2", Price = 20 });
-            food_3.Add(new Food() { Id = 102, Name = "Drink_3", Price = 30 });
-            food_3.Add(new Food() { Id = 103, Name = "Drink_4", Price = 40 });
-            food_3.Add(new Food() { Id = 104, Name = "Drink_5", Price = 50 });
+            food_3.Add(new Food() { Id = 110, Catagory = "Drink", Name = "Drink_1", Price = 10000, Quantity = 0 });
+            food_3.Add(new Food() { Id = 111, Catagory = "Drink", Name = "Drink_2", Price = 20000, Quantity = 0 });
+            food_3.Add(new Food() { Id = 112, Catagory = "Drink", Name = "Drink_3", Price = 30000, Quantity = 0 });
+            food_3.Add(new Food() { Id = 113, Catagory = "Drink", Name = "Drink_4", Price = 40000, Quantity = 0 });
+            food_3.Add(new Food() { Id = 114, Catagory = "Drink", Name = "Drink_5", Price = 50000, Quantity = 0 });
 
-            FoodCatagory fCatagory = new FoodCatagory(food_1) { Id = 1, Name = "FastFood"};
-            FoodCatagory fCatagory_1 = new FoodCatagory(food_2) { Id = 2, Name = "Classic",};
-            FoodCatagory fCatagory_2 = new FoodCatagory(food_3) { Id = 3, Name = "Drink", };
+            FoodCatagory fCatagory = new FoodCatagory(food_1) { Id = 1, Type = "FastFood"};
+            FoodCatagory fCatagory_1 = new FoodCatagory(food_2) { Id = 2, Type = "Classic"};
+            FoodCatagory fCatagory_2 = new FoodCatagory(food_3) { Id = 3, Type = "Drink"};
 
             foodList.Add(fCatagory);
             foodList.Add(fCatagory_1);

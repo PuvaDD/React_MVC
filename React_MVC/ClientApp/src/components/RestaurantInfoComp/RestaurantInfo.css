@@ -1,0 +1,60 @@
+﻿.resinfo-main-div {
+    display: grid;
+    grid-gap: 6%;
+    grid-template-rows: max-content 1fr;
+    padding: 3%;
+    border: 1px solid #beb9b9;
+    border-radius: 5px;
+    margin: 1%;
+}
+
+.top-div-resinfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2%;
+}
+
+.bottom-div-resinfo {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-content: center;
+    height: 90%;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.contact-info-p {
+    display: grid;
+    place-content: flex-end;
+    font-size: medium;
+}
+
+.availability-div {
+    border: 1px solid #d9d3d3;
+    border-radius: 4px;
+    border-bottom: 0px;
+}
+
+.info-table {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-bottom: 2%;
+    border-bottom: 1px solid #d9d3d3;
+    padding-top: 1%;
+}
+
+.weekday {
+    padding-right: 0.5rem;
+    text-align: right;
+}
+
+td {
+    padding-right: 2.7em;
+    text-align: right;
+}
+
+.res-info-pic {
+    height: 100%;
+    width: 100%;
+}

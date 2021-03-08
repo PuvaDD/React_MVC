@@ -15,12 +15,14 @@ function HeaderComp() {
         <Header className="header">
             <div className="header-div">
                 <Button className="signin-btn" size="lg" onClick={LogIn}>ورود / عضویت</Button>
-                <img
-                    className="header-logo"
-                    src="/logo.png"
-                    alt="logo"
-                    height="100px"
-                />
+                <div>
+                    <img
+                        className="header-logo"
+                        src="/logo.png"
+                        alt="logo"
+                        height="100px"
+                    />
+                </div>
             </div>
         </Header>
     )

@@ -1,4 +1,8 @@
-﻿.menu-div {
+﻿* {
+    box-sizing: border-box
+}
+
+.menu-div {
     background-color: white;
 }
 
@@ -31,10 +35,17 @@
 
 .food-item-panel {
     box-sizing: border-box;
+    position: relative;
     display: grid;
     place-content: center;
     background-color: #f9faf6;
+    z-index: 1;
+    overflow: inherit;
 }
+
+    .food-item-panel:hover {
+        background-color: #f8e9e9
+    }
 
 .food-item-info {
     display: grid;
@@ -66,13 +77,13 @@
 }
 
 .food-item-price {
-    padding-left: 15% !important;
-    padding-right: 15% !important;
-    margin-left: 25%;
+    padding-left: 14px !important;
+    margin-left: 10%;
     border: 1px solid #c1a048;
     border-radius: 5px;
     background-color: #c1a048;
     color: white;
+    width: 70px;
 }
 
 .food-item-divider {
@@ -87,4 +98,42 @@
 .ctg-element:hover {
     border-bottom: 1px solid black;
     border-radius: 0px;
+}
+
+.badge-main-div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    position: absolute;
+    z-index: 10;
+    bottom: -3%;
+    right: 2%;
+}
+
+.badge-plus-icon {
+    background-color: #db1c1c;
+    color: whitesmoke;
+}
+
+.badge-plus-icon:hover {
+    color: #575757;
+    background-color: #d51111;
+}
+
+.badge-quantity {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #ffc107;
+    padding: 1px;
+    padding-right: 15px;
+    align-self: center;
+    height: 25px;
+    width: 70px;
+    position: absolute;
+    right: 30%;
+    text-align: center;
+    font-weight: 600;
+}
+
+a {
+    font-weight: 600;
 }

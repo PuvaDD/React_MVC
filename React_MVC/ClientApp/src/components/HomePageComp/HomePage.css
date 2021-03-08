@@ -1,11 +1,8 @@
 ﻿.home-content {
     display: grid;
-    grid-template-rows: max-content 1fr;
-}
-
-.home-content .bottom-div {
-    display: grid;
-    place-content: center;
+    grid-template-rows: max-content 1fr max-content;
+    width: 100%;
+    height: 100%;
 }
 
 .bdiv {
@@ -19,6 +16,8 @@
 
 .top-div {
     position: relative;
+    width: 100%;
+    height: 25%;
 }
 
 .carousel-text-container {
@@ -41,10 +40,12 @@
 }
 
 .bottom-div {
-    background-color: rgb(234, 236, 238);
+    display: grid;
+    grid-template-rows: max-content 1fr;
+    place-content: center;
     position: absolute;
     top: 50px;
-    left: 16%;
+    place-self: center;
 }
 
 .bottom-nav-div {
@@ -54,11 +55,6 @@
 .nav-items {
     width: 35vw;
     text-align: center;
-}
-
-.home-content .bottom-div {
-    display: grid;
-    grid-template-rows: max-content 1fr;
 }
 
 .menu-div {
@@ -88,8 +84,195 @@
     display: grid;
     place-content: center;
     position: relative;
+    width: 100%;
+    height: 75%;
 }
 
 .rs-carousel-toolbar {
+    display: none;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.home-nav {
+    border-bottom: 0px;
+}
+
+.drawer-header-div {
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
+    background-color: #f8f8f8;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: 1px solid grey;
+}
+
+.drawer-close-btn {
+    padding-right: 24px;
+    height: 36px;
+    position: relative;
+    top: 30%;
+    border: 1px solid grey;
+}
+
+.drawer-header-text {
+    text-align: center;
+    padding-top: 1.5%;
+}
+
+.rs-drawer-header-close {
+    display: none;
+}
+
+.rs-drawer-header {
+    padding-left: 0px;
+    position: relative;
+    margin: 0px;
+}
+
+.drawer-header-text-div {
+    display: grid;
+    place-content: center;
+}
+
+.drawer-body-main-div {
+    display: grid;
+    grid-template-rows: 1fr max-content;
+    position: absolute;
+    left: 15%;
+    top: 10%;
+    right: 15%;
+}
+
+.drawer-body-top-div {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    height: 7vh;
+    padding-left: 14%;
+    padding-right: 14%;
+}
+
+.drawer-top-div-text {
+    text-align: center;
+    font-weight: bold;
+    font-size: medium;
+    place-self: center;
+}
+
+.shopping-item-main-div {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-area-gap: 3%;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.shopping-item-credentials {
+    display: grid;
+    place-content: center;
+    font-weight: 600;
+    font-size: medium;
+}
+
+.shopping-item-img {
+    height: 90%;
+    width: 90%;
+    padding: 5%;
+}
+
+.shopping-item-remove {
+    display: grid;
+    place-content: center;
+}
+
+.rs-input {
+    text-align: center;
+}
+
+.rs-icon {
+    place-self: center;
+}
+
+.shopping-item-input-div {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    place-content: center;
+}
+
+#plus-icon {
+    color: green;
+    place-self: center;
+}
+
+#minus-icon {
+    color: red;
+    place-self: center;
+}
+
+.rs-drawer-body {
+    position: relative;
+    height: 100vh !important;
+}
+
+#shopping-list-add-remove-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 36px;
+    height: 36px;
+    padding: 8px 0;
+    font-size: 2.8em;
+    line-height: 0.528571;
+}
+
+.shopping-item-remove {
+    place-self: center;
+}
+
+#shopping-item-remove-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 36px;
+    height: 36px;
+    padding: 8px 0;
+    font-size: 2.6em;
+    line-height: 0.528571;
+}
+
+.drawer-sum-div {
+    position: relative;
+    width: 100%;
+    display: grid;
+}
+
+.drawer-divider {
+    height: 2px;
+    margin-top: 30px;
+    z-index: 0;
+    background-color: #509f54;
+}
+
+.sum-span {
+    position: absolute;
+    top: 2vh;
+    z-index: 10;
+    background-color: #595454;
+    border-radius: 8px;
+    padding: 1%;
+    color: white;
+    place-self: center;
+}
+
+.rs-drawer-content {
+    height: 100vh;
+}
+
+::-webkit-scrollbar {
     display: none;
 }
