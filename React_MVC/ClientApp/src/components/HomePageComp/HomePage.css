@@ -17,15 +17,16 @@
 .top-div {
     position: relative;
     width: 100%;
-    height: 25%;
+    height: 100%;
 }
 
 .carousel-text-container {
     position: absolute;
     position: absolute;
-    top: 100px;
-    right: 100px;
+    top: 30%;
+    right: 10%;
     color: aliceblue;
+    width: max-content;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -43,13 +44,24 @@
     display: grid;
     grid-template-rows: max-content 1fr;
     place-content: center;
-    position: absolute;
-    top: 50px;
-    place-self: center;
+    top: 39px;
+    bottom: 5%;
+    position: relative;
+    top: 10px;
+}
+
+.bottom-div-main {
+    grid-gap: 4px;
+    grid-template-rows: max-content 1fr;
+    place-content: center;
+    width: 100%;
+    height: 122vh;
+    background-color: whitesmoke;
 }
 
 .bottom-nav-div {
     background-color: rgb(255, 255, 255);
+    border-radius: 8px;
 }
 
 .nav-items {
@@ -80,16 +92,16 @@
     place-content: center;
 }
 
-.bottom-div-main {
-    display: grid;
-    place-content: center;
-    position: relative;
-    width: 100%;
-    height: 75%;
+.food-sec-div {
+    background-color: white;
 }
 
 .rs-carousel-toolbar {
     display: none;
+}
+
+.rs-carousel {
+    height: 100%;
 }
 
 ul {
@@ -214,13 +226,12 @@ ul {
 
 .rs-drawer-body {
     position: relative;
-    height: 100vh !important;
 }
 
 #shopping-list-add-remove-btn {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -5px;
+    right: -5.7px;
     display: block;
     width: 36px;
     height: 36px;
@@ -246,8 +257,10 @@ ul {
 }
 
 .drawer-sum-div {
-    position: relative;
+    position: sticky;
+    bottom: 0px;
     width: 100%;
+    background-color: white;
     display: grid;
 }
 
@@ -269,10 +282,227 @@ ul {
     place-self: center;
 }
 
+.toggle-drawer-btn {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+}
+
+    .toggle-drawer-btn:hover {
+        cursor: pointer;
+    }
+
+.open-closed-div {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: 1fr;
+    grid-gap: 5px;
+    place-content: end;
+    margin-right: 4px;
+}
+
+.online-offline-icon {
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border-radius: 50%;
+    animation: blinker 1s linear infinite;
+    place-self: center;
+}
+
+.online-offline-text {
+    font-weight: bold;
+    font-size: small;
+}
+
+.rs-badge-wrapper .rs-badge-content {
+    top: 25%;
+    left: 10%;
+}
+
+.rs-nav-item > a.rs-nav-item-content {
+    background-color: whitesmoke;
+}
+
+.rs-nav.rs-nav-horizontal .rs-dropdown, .rs-nav.rs-nav-horizontal .rs-nav-item {
+    width: 100%;
+}
+
+.rs-nav-tabs .rs-nav-item.rs-nav-item-active {
+    width: 100%;
+}
+
+.rs-alert-container {
+    right: 1% !important;
+    top: 20% !important;
+}
+
+.rs-alert-container .rs-alert-info .rs-alert-item-content {
+    background-color: #e8d954;
+    color: #333030;
+}
+
+.rs-alert-container .rs-alert-info .rs-alert-item-close {
+    color: #070707;
+}
+
+.rs-alert-container .rs-alert-info .rs-alert-item-content .rs-icon {
+    color: #423c3c;
+}
+
+.rs-drawer-backdrop.in {
+    opacity: 0.7 !important;
+}
+
+#menu-nav-btn {
+    color: grey;
+}
+
+#resi-nav-btn {
+    color: #4949b4;
+}
+
 .rs-drawer-content {
     height: 100vh;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+@media screen and (max-width: 500px){
+    .bottom-div {
+        display: grid;
+        grid-template-rows: max-content 1fr;
+        place-content: center;
+        bottom: 5%;
+        place-self: center;
+    }
+
+    .carousel-text-container {
+        position: absolute;
+        top: 13%;
+        right: 5%;
+        color: aliceblue;
+        width: max-content;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    .restaurant-name {
+        font-size: 2.4em;
+    }
+
+    .restaurant-adress {
+        font-size: large;
+        text-align: end;
+        margin-top: 5px;
+    }
+
+    .shopping-item-credentials {
+        font-size: smaller;
+    }
+
+    .drawer-body-main-div {
+        display: grid;
+        grid-template-rows: 1fr max-content;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        right: 0%;
+    }
+
+    #shopping-item-remove-icon {
+        position: absolute;
+        top: 4px;
+        right: 0;
+        display: block;
+        width: 36px;
+        height: 36px;
+        padding: 8px 0;
+        font-size: 1.5em;
+        line-height: 0.528571;
+    }
+
+    #shopping-list-add-remove-btn {
+        position: absolute;
+        top: -2px;
+        right: -6px;
+        display: block;
+        width: 36px;
+        height: 36px;
+        padding: 8px 0;
+        font-size: 2.1em;
+        line-height: 0.528571;
+    }
+
+    .drawer-header-icon-btn {
+        border: 1px solid grey;
+        padding: 12px;
+        border-radius: 8px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 500px) {
+    .bottom-div {
+        display: grid;
+        position: relative;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+@media screen and (max-width: 520px) and (min-width: 500px){
+    .restaurant-adress {
+        font-size: large;
+        text-align: end;
+        margin-top: 3px;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 500px){
+
+    .shopping-item-credentials {
+        font-size: 1em;
+    }
+
+    .drawer-body-main-div {
+        display: grid;
+        grid-template-rows: 1fr max-content;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+        right: 0%;
+    }
+
+    #shopping-item-remove-icon {
+        position: absolute;
+        top: 4px;
+        right: 0;
+        display: block;
+        width: 36px;
+        height: 36px;
+        padding: 8px 0;
+        font-size: 1.5em;
+        line-height: 0.528571;
+    }
+
+    #shopping-list-add-remove-btn {
+        position: absolute;
+        top: -2px;
+        right: -6px;
+        display: block;
+        width: 36px;
+        height: 36px;
+        padding: 8px 0;
+        font-size: 2.1em;
+        line-height: 0.528571;
+    }
+
+    .drawer-header-icon-btn {
+        border: 1px solid grey;
+        padding: 12px;
+        border-radius: 8px;
+    }
 }

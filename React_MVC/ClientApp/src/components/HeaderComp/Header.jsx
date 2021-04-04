@@ -20,7 +20,6 @@ function HeaderComp() {
                         className="header-logo"
                         src="/logo.png"
                         alt="logo"
-                        height="100px"
                     />
                 </div>
             </div>

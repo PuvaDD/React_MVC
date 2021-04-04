@@ -9,22 +9,29 @@ function LogInComp() {
     const [input_E, setinput_E] = useState("")
     const [input_P, setinput_P] = useState("")
 
-/*    const SignInUser = () => {
-        fetch('User', {
+    const SignInUser = async() => {
+        setloading(true)
+
+        var response = await fetch('User', {
             method: "POST",
             headers: {
-                "Content-Type" : "application/json"
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                Email: input_E,
-                Password: input_P
+                email: input_E,
+                password: input_P
             })
         })
-        .then(response => { return response.json() })
-        .then((result) => {
-            console.log("sign in res = ", result)
+        .catch(error => {
+            console.log("Error = ", error)
         })
-    }*/
+
+        var result = await response.json()
+        setloading(false)
+
+        console.log("RES = ", result)
+
+    }
 
     const HandleEmailChange = (value) => {
         setinput_E(value)
@@ -81,12 +88,12 @@ function LogInComp() {
                 </div>
 
                 <div className="action-sec">
-                    <Button className="login-btn">ورود</Button>
-                    <Link className="forgot-pass-text">رمز عبور را فراموش کردم</Link>
+                    <Button className="login-btn" onClick={SignInUser}>ورود</Button>
+                    <a className="forgot-pass-text">رمز عبور را فراموش کردم</a>
                 </div>
 
                 <div className="link-to-signup-div">
-                    <p> اگر عضو باشگاه نیستید، هم اکنون <Link className="signup-link">ثبت نام</Link> کنید</p>
+                    <p> اگر عضو باشگاه نیستید، هم اکنون <a className="signup-link">ثبت نام</a> کنید</p>
                 </div>
             </div>
         </Content>
