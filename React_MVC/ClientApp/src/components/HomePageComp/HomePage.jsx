@@ -121,8 +121,8 @@ function HomePageComp({ ...props }) {
         setshowDrawer(false)
     }
 
-    console.log("W = ", window.innerWidth)
-    console.log("shoppingList = ", props.shoppingList)
+/*    console.log("W = ", window.innerWidth)
+    console.log("shoppingList = ", props.shoppingList)*/
     return (
         <Content className="home-content">
             <div className="top-div">

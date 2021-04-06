@@ -1,13 +1,15 @@
 ﻿import React, { useState } from 'react';
-import { Content, InputGroup, Icon, Button, Input } from 'rsuite';
-import { Link } from "react-router-dom";
+import { Content, InputGroup, Icon, Button, Input, Alert } from 'rsuite';
+import { Link, useHistory } from "react-router-dom";
+import Cookies from 'js-cookie';
 import './LogIn.css'
 
-function LogInComp() {
+function LogInComp({ setisLoggedIn }) {
 
     const [loading, setloading] = useState(false)
     const [input_E, setinput_E] = useState("")
     const [input_P, setinput_P] = useState("")
+    const history = useHistory();
 
     const SignInUser = async() => {
         setloading(true)
@@ -29,6 +31,29 @@ function LogInComp() {
         var result = await response.json()
         setloading(false)
 
+        if (result.returnVal === 1) {
+
+            var cookieVal = JSON.stringify({
+                ID: result.cookieID,
+                userEmail: input_E
+            })
+
+            var inOneMinute = new Date(new Date().getTime() + 1 * 60 * 1000)
+
+            Cookies.set("signedInCookie", cookieVal, { expires: inOneMinute, secure: true }) //could add domain
+
+            Alert.success("خوش آمدید")
+
+            setisLoggedIn(true)
+            setTimeout(() => {
+                history.push("/")
+            }, 2000)
+
+        } else if (result.returnMSG === "Wrong Pass") {
+            Alert.error("پسورد اشتباه است")
+        } else if (result.returnMSG === "Wrong Email") {
+            Alert.error("ایمیل اشتباه است")
+        }
         console.log("RES = ", result)
 
     }
@@ -39,6 +64,18 @@ function LogInComp() {
 
     const HandlePassChange = (value) => {
         setinput_P(value)
+    }
+
+    const TESTT = () => {
+
+        fetch('user', {
+            method: "GET",
+            headers: {
+                "Content-Type" : "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(result => console.log(" GET RES = ", result))
     }
 
     return (
@@ -96,6 +133,8 @@ function LogInComp() {
                     <p> اگر عضو باشگاه نیستید، هم اکنون <a className="signup-link">ثبت نام</a> کنید</p>
                 </div>
             </div>
+
+            <Button onClick={TESTT}>NEW BTN</Button>
         </Content>
     )
 }

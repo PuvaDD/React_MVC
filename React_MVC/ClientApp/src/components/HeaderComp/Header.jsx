@@ -3,7 +3,7 @@ import { Header, Button } from 'rsuite';
 import { useHistory } from "react-router-dom";
 import './Header.css';
 
-function HeaderComp() {
+function HeaderComp({ isLoggedIn }) {
 
     const history = useHistory();
 
@@ -14,8 +14,10 @@ function HeaderComp() {
     return (
         <Header className="header">
             <div className="header-div">
-                <Button className="signin-btn" size="lg" onClick={LogIn}>ورود / عضویت</Button>
-                <div>
+
+                {!isLoggedIn ? <> <Button className="signin-btn" size="lg" onClick={LogIn}>ورود / عضویت</Button> </> : null }
+
+                <div style={isLoggedIn ? { display: "grid", placeContent: "end" } : null}>
                     <img
                         className="header-logo"
                         src="/logo.png"

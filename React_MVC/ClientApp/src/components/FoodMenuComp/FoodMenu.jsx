@@ -123,8 +123,8 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
         }
     }
 
-    console.log("Foodlist = ", props.foodList)
-    console.log("Foods To Show = ", foodsToShow)
+/*    console.log("Foodlist = ", props.foodList)
+    console.log("Foods To Show = ", foodsToShow)*/
     return (
             <Content>
 

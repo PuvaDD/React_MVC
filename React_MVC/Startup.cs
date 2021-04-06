@@ -21,6 +21,7 @@ namespace React_MVC
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddSession();
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -28,6 +29,8 @@ namespace React_MVC
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDistributedMemoryCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +46,8 @@ namespace React_MVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSession();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace React_MVC.Controllers
 {
@@ -18,9 +19,9 @@ namespace React_MVC.Controllers
         };
 
         [HttpGet]
-        public List<User> Get()
+        public ActionResult Get()
         {
-            return userList;
+            return Json( new { msg = HttpContext.Session.GetString("ID")});
         }
 
         [HttpPost]
@@ -51,7 +52,9 @@ namespace React_MVC.Controllers
                         Random rand = new Random();
                         var randomNum = rand.Next(1, 1000);
 
-                        res = Json(new { ReturnVal = 1, ReturnMSG = "Found User" });
+                        HttpContext.Session.SetString("ID", randomNum.ToString());
+
+                        res = Json(new { ReturnVal = 1, ReturnMSG = "Found User", CookieID = randomNum });
                         break;
                     }
                     else
