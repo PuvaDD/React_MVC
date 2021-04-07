@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import 'rsuite/dist/styles/rsuite-default-rtl.css'
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'; 
@@ -23,5 +23,5 @@ ReactDOM.render(
   </BrowserRouter>,
   rootElement);
 
-registerServiceWorker();
+serviceWorkerRegistration.register();
 

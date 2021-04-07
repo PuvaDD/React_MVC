@@ -20,7 +20,7 @@ function App() {
         var validCookie = Cookies.get("signedInCookie")
         console.log("VALID COOKIE = ", validCookie)
 
-        if (validCookie != undefined) {
+        if (validCookie !== undefined) {
             setisLoggedIn(true);
         }
     }

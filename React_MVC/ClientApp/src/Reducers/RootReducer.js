@@ -18,16 +18,16 @@ const rootReducer = (state = initState, action) => {
 
         case "ShoppingList_Add":
 
-            var foodItem = action.payload
+            var foodItem_1 = action.payload
 
-            var foundItem = state.shoppingList.find(item => {
-                if (item.id === foodItem.id) return true;
+            var foundItem_1 = state.shoppingList.find(item => {
+                if (item.id === foodItem_1.id) return true;
             })
 
-            if (foundItem) {
+            if (foundItem_1) {
 
-                var newFoodListData = state.foodList.map(item => {
-                    if (item.id === foundItem.id) {
+                var newFoodListData_1 = state.foodList.map(item => {
+                    if (item.id === foundItem_1.id) {
                         item.quantity++
                         return item
                     } else {
@@ -35,8 +35,8 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newShoppingListData = state.shoppingList.map(item => {
-                    if (item.id === foundItem.id) {
+                var newShoppingListData_1 = state.shoppingList.map(item => {
+                    if (item.id === foundItem_1.id) {
                         item.quantity++
                         return item
                     } else {
@@ -46,15 +46,15 @@ const rootReducer = (state = initState, action) => {
 
                 return {
                     ...state,
-                    foodList: newFoodListData,
-                    shoppingList: newShoppingListData
+                    foodList: newFoodListData_1,
+                    shoppingList: newShoppingListData_1
                 }
 
             } else {
-                foodItem.quantity++;
+                foodItem_1.quantity++;
 
                 var newFoodListData_2 = state.foodList.map(item => {
-                    if (item.id === foodItem.id) {
+                    if (item.id === foodItem_1.id) {
                         item.quantity++
                         return item
                     } else {
@@ -65,7 +65,7 @@ const rootReducer = (state = initState, action) => {
                 return {
                     ...state,
                     foodList: newFoodListData_2,
-                    shoppingList: [...state.shoppingList, foodItem]
+                    shoppingList: [...state.shoppingList, foodItem_1]
                 }
             }
 
@@ -73,14 +73,14 @@ const rootReducer = (state = initState, action) => {
 
         case "ShoppingList_Remove_One":
 
-            var foodItem = action.payload;
-            var newFoodListData;
-            var newShoppingListData;
+            var foodItem_2 = action.payload;
+            /*var newFoodListData_3;*/
+            var newShoppingListData_2;
 
-            foodItem.quantity--
+            foodItem_2.quantity--
 
-            newShoppingListData = state.shoppingList.map(item => {
-                if (item.id === foodItem.id) {
+            newShoppingListData_2 = state.shoppingList.map(item => {
+                if (item.id === foodItem_2.id) {
                     item.quantity--
                     return item
                 } else {
@@ -88,10 +88,10 @@ const rootReducer = (state = initState, action) => {
                 }
             })
 
-/*            newFoodListData = state.foodList.map(item => {
-                if (item.catagory === foodItem.catagory) {
+/*            newFoodListData_3 = state.foodList.map(item => {
+                if (item.catagory === foodItem_2.catagory) {
                     for (var i = 0; i < item.foodList.length; i++) {
-                        if (item.foodList[i].id === foodItem.id) {
+                        if (item.foodList[i].id === foodItem_2.id) {
                             item.foodList[i].quantity--
                             return item
                         } else {
@@ -103,27 +103,25 @@ const rootReducer = (state = initState, action) => {
                 }
             })*/
 
-            console.log("REACHED")
-
             return {
                 ...state,
-                /*foodList: newFoodListData,*/
-                shoppingList: newShoppingListData
+                /*foodList: newFoodListData_3,*/
+                shoppingList: newShoppingListData_2
             }
             break;
 
         case "ShoppingList_Btn_Add":
 
-            var foodItem = action.payload
+            var foodItem_3 = action.payload
 
-            var foundItem = state.shoppingList.find(item => {
-                if (item.id === foodItem.id) return true;
+            var foundItem_3 = state.shoppingList.find(item => {
+                if (item.id === foodItem_3.id) return true;
             })
 
-            if (foundItem) {
+            if (foundItem_3) {
 
-                var newShoppingListData = state.shoppingList.map(item => {
-                    if (item.id === foodItem.id) {
+                var newShoppingListData_3 = state.shoppingList.map(item => {
+                    if (item.id === foodItem_3.id) {
                         item.quantity++
                         return item
                     } else {
@@ -131,8 +129,8 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newFoodListData = state.foodList.map(item => {
-                    if (item.id === foundItem.id) {
+                var newFoodListData_4 = state.foodList.map(item => {
+                    if (item.id === foundItem_3.id) {
                         item.quantity++
                         return item
                     } else {
@@ -142,24 +140,24 @@ const rootReducer = (state = initState, action) => {
 
                 return {
                     ...state,
-                    foodList: newFoodListData,
-                    shoppingList: newShoppingListData
+                    foodList: newFoodListData_4,
+                    shoppingList: newShoppingListData_3
                 }
             }
             break;
 
         case "ShoppingList_Btn_Remove":
 
-            var foodItem = action.payload
+            var foodItem_4 = action.payload
 
-            var foundItem = state.shoppingList.find(item => {
-                if (item.id === foodItem.id) return true;
+            var foundItem_4 = state.shoppingList.find(item => {
+                if (item.id === foodItem_4.id) return true;
             })
 
-            if (foundItem) {
+            if (foundItem_4) {
 
-                var newShoppingListData = state.shoppingList.map(item => {
-                    if (item.id === foodItem.id) {
+                var newShoppingListData_4 = state.shoppingList.map(item => {
+                    if (item.id === foodItem_4.id) {
                         item.quantity--
                         return item
                     } else {
@@ -167,8 +165,8 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newFoodListData = state.foodList.map(item => {
-                    if (item.id === foundItem.id) {
+                var newFoodListData_5 = state.foodList.map(item => {
+                    if (item.id === foundItem_4.id) {
                         item.quantity--
                         return item
                     } else {
@@ -178,24 +176,24 @@ const rootReducer = (state = initState, action) => {
 
                 return {
                     ...state,
-                    foodList: newFoodListData,
-                    shoppingList: newShoppingListData
+                    foodList: newFoodListData_5,
+                    shoppingList: newShoppingListData_4
                 }
             }
             break;
 
         case "ShoppingList_Remove":
 
-            var foodItem = action.payload
+            var foodItem_5 = action.payload
 
-            foodItem.quantity = 0
+            foodItem_5.quantity = 0
 
             var newShoppingList = state.shoppingList.filter(item => {
-                if (item.id !== foodItem.id) return item;
+                if (item.id !== foodItem_5.id) return item;
             })
 
-            var newFoodListData = state.foodList.map(item => {
-                if (item.id === foodItem.id) {
+            var newFoodListData_6 = state.foodList.map(item => {
+                if (item.id === foodItem_5.id) {
                     item.quantity = 0
                     return item
                 } else {
@@ -205,7 +203,7 @@ const rootReducer = (state = initState, action) => {
 
             return {
                 ...state,
-                foodList: newFoodListData,
+                foodList: newFoodListData_6,
                 shoppingList: newShoppingList
             }
             break;

@@ -308,7 +308,7 @@ ul {
     height: 12px;
     display: inline-block;
     border-radius: 50%;
-    animation: blinker 1s linear infinite;
+    animation: blink 1.5s linear infinite;
     place-self: center;
 }
 
@@ -504,5 +504,11 @@ ul {
         border: 1px solid grey;
         padding: 12px;
         border-radius: 8px;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
     }
 }

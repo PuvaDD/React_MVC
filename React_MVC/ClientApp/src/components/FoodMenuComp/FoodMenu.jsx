@@ -14,6 +14,14 @@ function FoodCtgElement({ foods, setfoodsToShow, onClick, ...props }) {
                 setfoodsToShow(foodItem.foodList)
             }
         })
+
+        var ctgHeaderOffsetTop = window.scrollY + document.querySelector('.open-closed-div').getBoundingClientRect().top //why scroll y
+
+        window.scrollTo({
+            top: ctgHeaderOffsetTop,
+            left: 0,
+            behavior: "smooth"
+        })
     }
 
     return (
@@ -125,6 +133,7 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
 
 /*    console.log("Foodlist = ", props.foodList)
     console.log("Foods To Show = ", foodsToShow)*/
+
     return (
             <Content>
 
