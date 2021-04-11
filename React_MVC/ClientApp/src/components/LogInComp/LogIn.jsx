@@ -1,14 +1,13 @@
 ﻿import React, { useState } from 'react';
 import { Content, InputGroup, Icon, Button, Input, Alert } from 'rsuite';
 import { Link, useHistory } from "react-router-dom";
+import { connect } from 'react-redux'
 import Cookies from 'js-cookie';
 import './LogIn.css'
 
-function LogInComp({ setisLoggedIn }) {
+function LogInComp({ setinput_P, setinput_E, input_P, input_E, setisLoggedIn, ...props }) {
 
     const [loading, setloading] = useState(false)
-    const [input_E, setinput_E] = useState("")
-    const [input_P, setinput_P] = useState("")
     const history = useHistory();
 
     const SignInUser = async() => {
@@ -33,15 +32,10 @@ function LogInComp({ setisLoggedIn }) {
 
         if (result.returnVal === 1) {
 
-            var cookieVal = JSON.stringify({
-                ID: result.cookieID,
-                userEmail: input_E
-            })
+            props.SaveLoggedInUser(input_E)
 
-            var inOneMinute = new Date(new Date().getTime() + 1 * 60 * 1000)
-
-            Cookies.set("signedInCookie", cookieVal, { expires: inOneMinute, secure: true }) //could add domain
-
+            SetSignInCookie(result)
+ 
             Alert.success("خوش آمدید")
 
             setisLoggedIn(true)
@@ -56,6 +50,34 @@ function LogInComp({ setisLoggedIn }) {
         }
         console.log("RES = ", result)
 
+    }
+
+    const SetSignInCookie = (res) => {
+
+        const CheckForCookies = () => {
+            var init_Cookie = Cookies.get("InitCookie")
+
+            if (init_Cookie !== undefined) {
+
+                var init_C_val = JSON.parse(init_Cookie)
+
+                return init_C_val.SL
+            } else {
+                return []
+            }
+        }
+
+        var cookieVal = JSON.stringify({
+            ID: res.cookieID,
+            UserEmail: input_E,
+            Type: "SignIn",
+            SL: CheckForCookies()
+        })
+
+        var inOneMinute = new Date(new Date().getTime() + 1 * 60 * 1000)
+
+        Cookies.set("signedInCookie", cookieVal, { expires: inOneMinute, secure: true }) //could add domain
+        Cookies.remove("InitCookie")
     }
 
     const HandleEmailChange = (value) => {
@@ -139,4 +161,16 @@ function LogInComp({ setisLoggedIn }) {
     )
 }
 
-export default LogInComp;
+const mapStateToProps = (state) => {
+    return {
+        loggedInUser: state.loggedInUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        SaveLoggedInUser: (userEmail) => { dispatch({ type: "SaveLoggedInUser", payload: userEmail }) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInComp);

@@ -1,19 +1,59 @@
 ﻿var initState = {
+    loggedInUser: "",
     foodList: [],
     shoppingList: []
 }
 
 const rootReducer = (state = initState, action) => {
+
     switch (action.type) {
 
         case "Get_FoodList":
 
-            var List = action.payload;
+            var { List, cookieSL } = action.payload;
+            var newFoodListData = []
+
+            console.log("init List = ", List)
+            console.log("CSL = ", cookieSL) 
+
+            if (cookieSL.length > 0) {
+                
+                newFoodListData = state.foodList.reduce((finalArr, currentVal) => {
+
+                    for (var i = 0; i < currentVal.foodList.length; i++) {
+                        for (var j = 0; j < cookieSL.length; j++) {
+
+                            if (currentVal.foodList[i].id === cookieSL[j].ID) {
+
+                                currentVal.foodList[i].quantity = cookieSL[j].Quantity
+                            }
+                        }
+                    }
+                    return finalArr
+                }, state.foodList)
+
+                console.log("NEW DATAAAAA = ", newFoodListData)
+            }
+
+            const getFoodList = () => {
+                var returnVal
+
+                if (newFoodListData.length <= 0) {
+                    returnVal = List
+                }
+                else {
+                    console.log("New D = ", newFoodListData)                    
+                    returnVal = newFoodListData
+                }
+
+                return returnVal
+            }
 
             return {
                 ...state,
-                foodList: List
+                foodList: getFoodList()
             }
+
             break;
 
         case "ShoppingList_Add":
@@ -231,6 +271,15 @@ const rootReducer = (state = initState, action) => {
                 ...state,
                 foodList: updatedFoodList,
                 shoppingList: updatedList
+            }
+            break;
+
+        case "SaveLoggedInUser":
+            var userEmail = action.payload
+
+            return {
+                ...state,
+                loggedInUser: userEmail
             }
             break;
 

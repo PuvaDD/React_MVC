@@ -20,7 +20,7 @@ const store = createStore(rootReducer);
 ReactDOM.render(
     <BrowserRouter basename={baseUrl}>
         <Provider store={store}><App /></Provider>
-  </BrowserRouter>,
+    </BrowserRouter>,
   rootElement);
 
 serviceWorkerRegistration.register();

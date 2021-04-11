@@ -10,7 +10,7 @@
 
 .top-div-resinfo {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr max-content;
     grid-gap: 2%;
 }
 
@@ -61,4 +61,22 @@ td {
 
 .restaurant-adress {
     margin-top: 0px;
+}
+
+@media screen and (max-width: 500px) {
+    .top-div-resinfo {
+        display: grid;
+        grid-template-columns: 1fr !important;
+        grid-gap: 2%;
+    }
+
+    .resinfo-main-div {
+        display: grid;
+        grid-gap: 3%;
+        grid-template-rows: max-content 1fr;
+        padding: 3%;
+        border: 1px solid #beb9b9;
+        border-radius: 5px;
+        margin: 1%;
+    }
 }

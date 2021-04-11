@@ -1,7 +1,9 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import "./FoodMenu.css";
+import React, { useEffect, useState } from 'react';
 import { Content, Panel, Divider, IconButton, Icon } from 'rsuite';
 import { connect } from 'react-redux';
-import "./FoodMenu.css";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Cookies from 'js-cookie';
 
 function FoodCtgElement({ foods, setfoodsToShow, onClick, ...props }) {
 
@@ -50,7 +52,7 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
     }, [])
 
     useEffect(() => {
-        console.log("Mounted Again")
+
     }, [props.foodList])
 
     const GatherData = async () => {
@@ -68,9 +70,39 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
         const response = await fetch('Food');
         const result = await response.json();
 
+        console.log("RES = ", result)
+        var signedInCookie = Cookies.get("signedInCookie")
+        var initCookie = Cookies.get("InitCookie")
+        
+
         if (Object.keys(props.foodList).length <= 0) {
-            props.GetFoodList(result);
-            return result
+            
+            if (signedInCookie !== undefined) {
+                var signedInCookieVal = JSON.parse(signedInCookie)
+
+                if (signedInCookieVal.SL.length <= 0) {
+
+                    props.GetFoodList(result, [])
+
+                    return result
+                } else {
+                    props.GetFoodList(result, signedInCookieVal.SL);
+                }
+            }
+
+            if (initCookie !== undefined) {
+                var initCookieVal = JSON.parse(initCookie)
+
+                if (initCookieVal.SL.length <= 0) {
+
+                    props.GetFoodList(result, [])
+
+                    return result
+                } else {
+                    props.GetFoodList(result, initCookieVal.SL)
+                }
+            }
+
         } else {
             return props.foodList
         }
@@ -87,7 +119,7 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
 
         props.addToShoppingList(foodItem)
 
-        console.log(foodItem)
+        /*console.log(foodItem)*/
     }
 
     const RemoveFromShoppingList = (foodItem) => {
@@ -131,8 +163,8 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
         }
     }
 
-/*    console.log("Foodlist = ", props.foodList)
-    console.log("Foods To Show = ", foodsToShow)*/
+    console.log("Foodlist = ", props.foodList)
+    console.log("Foods To Show = ", foodsToShow)
 
     return (
             <Content>
@@ -141,13 +173,17 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
 
                     <div className="menu-div-inner">
 
-                    <div className="menu-food-type" id="FoodHeader">
+                        <div className="menu-food-type" id="FoodHeader">
                             <FoodCtgElement foods={props.foodList} setfoodsToShow={setfoodsToShow} />
                         </div>
 
-                        <div className="food-section">
-                            {RenderFoodItems()}
-                        </div>
+                        <TransitionGroup>
+                            <CSSTransition in={true} appear={true} timeout={1000} classNames="fade">
+                                <div className="food-section">
+                                    {RenderFoodItems()}
+                                </div>
+                            </CSSTransition>
+                        </TransitionGroup>
 
                     </div>
 
@@ -166,9 +202,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        GetFoodList: (foodList) => { dispatch({ type: "Get_FoodList", payload: foodList }) },
+        GetFoodList: (foodList, cookieSL) => { dispatch({ type: "Get_FoodList", payload: { foodList, cookieSL } }) },
         addToShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Add", payload: foodItem }) },
-        removeFromShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Remove_One", payload: foodItem }) }
+        removeFromShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Remove_One", payload: foodItem }) },
+        UpdateStateUsingCookie: (foodsToUpdate) => { dispatch({ type: "UpdateState_UsingCookies", payload: foodsToUpdate }) }
     }
 }
 

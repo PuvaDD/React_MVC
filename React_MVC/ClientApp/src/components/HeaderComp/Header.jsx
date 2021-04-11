@@ -11,17 +11,31 @@ function HeaderComp({ isLoggedIn }) {
         history.push("/login")
     }
 
+    const LogOut = () => {
+        console.log("Logged Out")
+        /*fetch('user', {
+            method: "POST",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+
+            })
+        })*/
+    }
+
     return (
         <Header className="header">
             <div className="header-div">
 
-                {!isLoggedIn ? <> <Button className="signin-btn" size="lg" onClick={LogIn}>ورود / عضویت</Button> </> : null }
+                {!isLoggedIn ? <> <Button className="signin-btn" size="lg" onClick={LogIn}>ورود / عضویت</Button> </> : <Button className="signin-btn" size="lg" onClick={LogOut}>خروج</Button> }
 
-                <div style={isLoggedIn ? { display: "grid", placeContent: "end" } : null}>
+                <div >
                     <img
                         className="header-logo"
                         src="/logo.png"
                         alt="logo"
+                        onClick={() => history.push("/")}
                     />
                 </div>
             </div>

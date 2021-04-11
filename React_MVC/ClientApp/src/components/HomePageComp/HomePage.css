@@ -155,7 +155,7 @@ ul {
     grid-template-rows: 1fr max-content;
     position: absolute;
     left: 15%;
-    top: 10%;
+    top: 0;
     right: 15%;
 }
 
@@ -165,6 +165,10 @@ ul {
     height: 7vh;
     padding-left: 14%;
     padding-right: 14%;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 10;
 }
 
 .drawer-top-div-text {
@@ -202,6 +206,7 @@ ul {
 
 .rs-input {
     text-align: center;
+    width: 5vh;
 }
 
 .rs-icon {
@@ -226,6 +231,7 @@ ul {
 
 .rs-drawer-body {
     position: relative;
+    height: 500px !important;
 }
 
 #shopping-list-add-remove-btn {
@@ -413,6 +419,24 @@ ul {
         right: 0%;
     }
 
+    .drawer-body-top-div {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        height: 7vh;
+        padding-left: 14%;
+        padding-right: 0%;
+        position: sticky;
+        top: 0;
+        background-color: white;
+        z-index: 10;
+    }
+
+    .drawer-header-icon-btn {
+        border: 1px solid grey;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
     #shopping-item-remove-icon {
         position: absolute;
         top: 4px;
@@ -437,10 +461,16 @@ ul {
         line-height: 0.528571;
     }
 
-    .drawer-header-icon-btn {
-        border: 1px solid grey;
-        padding: 12px;
+    .shopping-item-main-div {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-area-gap: 3%;
+        text-align: center;
         border-radius: 8px;
+    }
+
+    .shopping-item-img {
+        display: none
     }
 }
 

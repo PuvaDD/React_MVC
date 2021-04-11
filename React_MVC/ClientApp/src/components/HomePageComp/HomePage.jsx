@@ -1,9 +1,10 @@
-﻿import React, { useState } from 'react';
+﻿import "./HomePage.css"
+import React, { useEffect, useState } from 'react';
 import { Content, Nav, Carousel, IconButton, Icon, Drawer, Header, Input, Divider, Badge, Alert } from 'rsuite';
 import FoodMenuComp from "../FoodMenuComp/FoodMenu"
 import RestaurantInfoComp from "../RestaurantInfoComp/RestaurantInfo"
 import { connect } from 'react-redux'
-import "./HomePage.css"
+import Cookies from 'js-cookie';
 
 function MyNavItem({ active, onSelect, ...props }) {
     return (
@@ -19,7 +20,6 @@ function HomePageComp({ ...props }) {
     const [active, setactive] = useState("menu")
     const [showDrawer, setshowDrawer] = useState(false)
     const [jiggleButton, setjiggleButton] = useState(false)
-
 
     const HandleNavState = (eventKey) => {
         if (eventKey === "menu") {
@@ -121,8 +121,11 @@ function HomePageComp({ ...props }) {
         setshowDrawer(false)
     }
 
-    /*console.log("W = ", window.innerWidth)*/
-/*    console.log("shoppingList = ", props.shoppingList)*/
+/*    console.log("W = ", window.innerWidth)
+    console.log("shoppingList = ", props.shoppingList)*/
+    console.log("Signed In Cookie = ", Cookies.get("signedInCookie"))
+/*    console.log("INIT COOKIE = ", Cookies.get("InitCookie"))*/
+
     return (
         <Content className="home-content">
             <div className="top-div">

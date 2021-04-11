@@ -26,7 +26,11 @@
     height: 100px;
 }
 
-@media screen and (max-width: 500px){
+    .header-logo:hover {
+        cursor: pointer
+    }
+
+@media screen and (max-width: 500px) {
     .header-logo {
         height: 80px;
     }
