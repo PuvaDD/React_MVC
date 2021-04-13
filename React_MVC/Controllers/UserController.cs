@@ -25,7 +25,8 @@ namespace React_MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] User userInfo)
+        [Route("[action]")]
+        public ActionResult LogIn([FromBody] User userInfo)
         {
             // 1 = True,  0 = False
             var email = userInfo.Email;
@@ -52,9 +53,12 @@ namespace React_MVC.Controllers
                         Random rand = new Random();
                         var randomNum = rand.Next(1, 1000);
 
+                        user.isLogedIn = true;
+
                         HttpContext.Session.SetString("ID", randomNum.ToString());
 
-                        res = Json(new { ReturnVal = 1, ReturnMSG = "Found User", CookieID = randomNum });
+                        res = Json(new { ReturnVal = 1, ReturnMSG = "Found User", CookieID = randomNum, LogInStatus = user.isLogedIn, sessionID = HttpContext.Session.GetString("ID") });
+
                         break;
                     }
                     else
@@ -64,6 +68,28 @@ namespace React_MVC.Controllers
                     }
                 }
             }
+            return res;
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        public ActionResult LogOut(User userInfo)
+        {
+            var email = userInfo.Email;
+            var res = Json(new { });
+
+            foreach(User user in userList)
+            {
+                if(user.Email == email)
+                {
+                    user.isLogedIn = false;
+
+                    HttpContext.Session.Clear();
+
+                    res = Json(new { ReturnVal = 1, ReturnMSG = "User Logged Out", LogInStatus = user.isLogedIn, SessionID = HttpContext.Session.GetString("ID") });
+                }
+            }
+
             return res;
         }
     }

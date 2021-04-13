@@ -1,9 +1,10 @@
 ﻿import React from 'react';
 import { Header, Button } from 'rsuite';
 import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux';
 import './Header.css';
 
-function HeaderComp({ isLoggedIn }) {
+function HeaderComp({ setisLoggedIn, isLoggedIn, ...props }) {
 
     const history = useHistory();
 
@@ -11,17 +12,27 @@ function HeaderComp({ isLoggedIn }) {
         history.push("/login")
     }
 
-    const LogOut = () => {
-        console.log("Logged Out")
-        /*fetch('user', {
+    const LogOut = async () => {
+
+        var response = await fetch('user/LogOut', {
             method: "POST",
             headers: {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify({
-
+                email: props.loggedInUser
             })
-        })*/
+        })
+        .catch(error => { console.log("error = ", error) })
+
+        var result = await response.json();
+
+        console.log("LogOut Res = ", result)
+
+        if (result.returnVal === 1) {
+            props.SaveLoggedInUser("")
+            setisLoggedIn(false)
+        }
     }
 
     return (
@@ -43,4 +54,16 @@ function HeaderComp({ isLoggedIn }) {
     )
 }
 
-export default HeaderComp;
+const mapStateToProps = (state) => {
+    return {
+        loggedInUser: state.loggedInUser
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        SaveLoggedInUser: (logedInUserVal) => { dispatch({ type: "SaveLoggedInUser", payload: logedInUserVal }) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComp);

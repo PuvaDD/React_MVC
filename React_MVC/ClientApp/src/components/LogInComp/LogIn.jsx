@@ -13,7 +13,7 @@ function LogInComp({ setinput_P, setinput_E, input_P, input_E, setisLoggedIn, ..
     const SignInUser = async() => {
         setloading(true)
 
-        var response = await fetch('User', {
+        var response = await fetch('User/LogIn', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -169,7 +169,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        SaveLoggedInUser: (userEmail) => { dispatch({ type: "SaveLoggedInUser", payload: userEmail }) }
+        SaveLoggedInUser: (logedInUserVal) => { dispatch({ type: "SaveLoggedInUser", payload: logedInUserVal }) }
     }
 }
 

@@ -11,11 +11,5 @@ namespace React_MVC
 
         public string Type { get; set; }
 
-        public List<Food> FoodList { get; set; }
-
-        public FoodCatagory(List<Food> list)
-        {
-            FoodList = list;
-        }
     }
 }

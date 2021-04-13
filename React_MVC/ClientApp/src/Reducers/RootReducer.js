@@ -1,5 +1,6 @@
 ﻿var initState = {
     loggedInUser: "",
+    foodCtg: [],
     foodList: [],
     shoppingList: []
 }
@@ -10,54 +11,19 @@ const rootReducer = (state = initState, action) => {
 
         case "Get_FoodList":
 
-            var { List, cookieSL } = action.payload;
-            var newFoodListData = []
-
-            console.log("init List = ", List)
-            console.log("CSL = ", cookieSL) 
-
-            if (cookieSL.length > 0) {
-                
-                newFoodListData = state.foodList.reduce((finalArr, currentVal) => {
-
-                    for (var i = 0; i < currentVal.foodList.length; i++) {
-                        for (var j = 0; j < cookieSL.length; j++) {
-
-                            if (currentVal.foodList[i].id === cookieSL[j].ID) {
-
-                                currentVal.foodList[i].quantity = cookieSL[j].Quantity
-                            }
-                        }
-                    }
-                    return finalArr
-                }, state.foodList)
-
-                console.log("NEW DATAAAAA = ", newFoodListData)
-            }
-
-            const getFoodList = () => {
-                var returnVal
-
-                if (newFoodListData.length <= 0) {
-                    returnVal = List
-                }
-                else {
-                    console.log("New D = ", newFoodListData)                    
-                    returnVal = newFoodListData
-                }
-
-                return returnVal
-            }
+            var { List, ctg } = action.payload;
 
             return {
                 ...state,
-                foodList: getFoodList()
+                foodCtg: ctg,
+                foodList: List
             }
 
             break;
 
         case "ShoppingList_Add":
 
+            console.log("Foodlist = ", state.foodList)
             var foodItem_1 = action.payload
 
             var foundItem_1 = state.shoppingList.find(item => {
@@ -75,23 +41,25 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newShoppingListData_1 = state.shoppingList.map(item => {
+/*                var newShoppingListData_1 = state.shoppingList.map(item => {
                     if (item.id === foundItem_1.id) {
                         item.quantity++
                         return item
                     } else {
                         return item
                     }
-                })
+                })*/
+
+/*                console.log("newShoppingListData_1 = ", newShoppingListData_1)*/
 
                 return {
                     ...state,
                     foodList: newFoodListData_1,
-                    shoppingList: newShoppingListData_1
+/*                    shoppingList: newShoppingListData_1*/
                 }
 
             } else {
-                foodItem_1.quantity++;
+            /*foodItem_1.quantity++;*/
 
                 var newFoodListData_2 = state.foodList.map(item => {
                     if (item.id === foodItem_1.id) {
@@ -113,13 +81,15 @@ const rootReducer = (state = initState, action) => {
 
         case "ShoppingList_Remove_One":
 
+            console.log("ShoppingList = ", state.shoppingList)
+
             var foodItem_2 = action.payload;
-            /*var newFoodListData_3;*/
+            var newFoodListData_3;
             var newShoppingListData_2;
 
             foodItem_2.quantity--
 
-            newShoppingListData_2 = state.shoppingList.map(item => {
+            newFoodListData_3 = state.foodList.map(item => {
                 if (item.id === foodItem_2.id) {
                     item.quantity--
                     return item
@@ -128,16 +98,10 @@ const rootReducer = (state = initState, action) => {
                 }
             })
 
-/*            newFoodListData_3 = state.foodList.map(item => {
-                if (item.catagory === foodItem_2.catagory) {
-                    for (var i = 0; i < item.foodList.length; i++) {
-                        if (item.foodList[i].id === foodItem_2.id) {
-                            item.foodList[i].quantity--
-                            return item
-                        } else {
-                            return item
-                        }
-                    }
+            /*newShoppingListData_2 = state.shoppingList.map(item => {
+                if (item.id === foodItem_2.id) {
+                    item.quantity--
+                    return item
                 } else {
                     return item
                 }
@@ -145,8 +109,8 @@ const rootReducer = (state = initState, action) => {
 
             return {
                 ...state,
-                /*foodList: newFoodListData_3,*/
-                shoppingList: newShoppingListData_2
+                foodList: newFoodListData_3,
+/*                shoppingList: newShoppingListData_2*/
             }
             break;
 
@@ -154,11 +118,15 @@ const rootReducer = (state = initState, action) => {
 
             var foodItem_3 = action.payload
 
+            console.log("Foodlist = ", state.foodList)
+
             var foundItem_3 = state.shoppingList.find(item => {
                 if (item.id === foodItem_3.id) return true;
             })
 
             if (foundItem_3) {
+
+                console.log("Found Item = ", foundItem_3)
 
                 var newShoppingListData_3 = state.shoppingList.map(item => {
                     if (item.id === foodItem_3.id) {
@@ -169,18 +137,18 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newFoodListData_4 = state.foodList.map(item => {
+/*                var newFoodListData_4 = state.foodList.map(item => {
                     if (item.id === foundItem_3.id) {
                         item.quantity++
                         return item
                     } else {
                         return item
                     }
-                })
+                })*/
 
                 return {
                     ...state,
-                    foodList: newFoodListData_4,
+/*                    foodList: newFoodListData_4,*/
                     shoppingList: newShoppingListData_3
                 }
             }
@@ -205,18 +173,18 @@ const rootReducer = (state = initState, action) => {
                     }
                 })
 
-                var newFoodListData_5 = state.foodList.map(item => {
+/*                var newFoodListData_5 = state.foodList.map(item => {
                     if (item.id === foundItem_4.id) {
                         item.quantity--
                         return item
                     } else {
                         return item
                     }
-                })
+                })*/
 
                 return {
                     ...state,
-                    foodList: newFoodListData_5,
+/*                    foodList: newFoodListData_5,*/
                     shoppingList: newShoppingListData_4
                 }
             }
@@ -250,36 +218,32 @@ const rootReducer = (state = initState, action) => {
 
         case "ShoppingList_Update":
 
-            var { updatedList, foodItemToRemove } = action.payload
+            var updatedList = []
 
-            var updatedFoodList = state.foodList.map(catagory => {
-                if (catagory.type === foodItemToRemove.type) {
-                    for (var i = 0; i < catagory.foodList.length; i++) {
-                        if (catagory.foodList[i].id === foodItemToRemove.id) {
-                            catagory.foodList[i].quantity = 0
-                            return catagory
-                        } else {
-                            return catagory
+            for (var i = 0; i < state.shoppingList.length; i++) {
+                if (state.shoppingList[i].quantity <= 0) {
+
+                    updatedList = state.shoppingList.filter(item => {
+                        if (item.id !== state.shoppingList[i].id) {
+                            return item;
                         }
-                    }
-                } else {
-                    return catagory
+                    })
                 }
-            })
+            }
 
             return {
                 ...state,
-                foodList: updatedFoodList,
-                shoppingList: updatedList
+                /*foodList: updatedFoodList,*/
+                shoppingList: updatedList.length <= 0 ? state.shoppingList : updatedList
             }
             break;
 
         case "SaveLoggedInUser":
-            var userEmail = action.payload
+            var logedInUserVal = action.payload
 
             return {
                 ...state,
-                loggedInUser: userEmail
+                loggedInUser: logedInUserVal
             }
             break;
 

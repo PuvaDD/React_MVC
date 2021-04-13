@@ -29,9 +29,6 @@ function App({ ...props }) {
 
             SetLogInStatus(SignInCookieVal)
 
-            //update foodList
-            /*props.UpdateStateUsingCookie(foodsToUpdate)*/
-            //update shoppingList
         } else {
 
             var initCookieVal = JSON.stringify({
@@ -87,13 +84,13 @@ function App({ ...props }) {
         props.SaveLoggedInUser(SignInCookieVal.UserEmail)
     }
 
-/*    console.log("IsLoggedIn = ", isLoggedIn)
-    console.log("loggedIn User = ", props.loggedInUser)*/
+    console.log("IsLoggedIn = ", isLoggedIn)
+    console.log("loggedIn User = ", props.loggedInUser)
     return (
         <Router>
             <Container className="main-container">
 
-                <HeaderComp isLoggedIn={isLoggedIn} />
+                <HeaderComp setisLoggedIn={setisLoggedIn} isLoggedIn={isLoggedIn}/>
 
                 <Switch>
                     

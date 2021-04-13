@@ -5,17 +5,19 @@ import { connect } from 'react-redux';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import Cookies from 'js-cookie';
 
-function FoodCtgElement({ foods, setfoodsToShow, onClick, ...props }) {
+function FoodCtgElement({ foodCtg, foodList, setfoodsToShow, onClick, ...props }) {
 
-    const SetFoodInfo = (event) => {
+    const SetActiveCTG = (event) => {
 
-        var foodType = event.target.getAttribute("data-food-type")
+        var foodType = Number(event.target.getAttribute("data-food-type-id"))
 
-        foods.filter(foodItem => {
-            if (foodItem.type === foodType) {
-                setfoodsToShow(foodItem.foodList)
+        var activeCTG = foodList.filter(foodItem => {
+            
+            if (foodItem.catagoryID === foodType) {
+                return foodItem
             }
         })
+        setfoodsToShow(activeCTG)
 
         var ctgHeaderOffsetTop = window.scrollY + document.querySelector('.open-closed-div').getBoundingClientRect().top //why scroll y
 
@@ -25,17 +27,17 @@ function FoodCtgElement({ foods, setfoodsToShow, onClick, ...props }) {
             behavior: "smooth"
         })
     }
-
+    
     return (
-        foods.map((food, i) => {
+        foodCtg.map((ctg, i) => {
             return (
-                <div key={i} style={{ display: "inline" }} className="ctg-element" onClick={SetFoodInfo}>
-                    {food.type === "فست فود" ? <> <img className="ctg-element-img" src="burger.png" alt="FastFood"data-food-type={food.type}/> </> : null}
-                    {food.type === "کلاسیک" ? <> <img className="ctg-element-img" src="desert.png" alt="Classic"data-food-type={food.type}/> </> : null}
-                    {food.type === "نوشیدنی" ? <> <img className="ctg-element-img" src="drink.png" alt="Drink"data-food-type={food.type}/> </> : null}
+                <div key={i} style={{ display: "inline" }} className="ctg-element" data-food-type-id={ctg.id} onClick={SetActiveCTG}>
+                    {ctg.type === "فست فود" ? <> <img className="ctg-element-img" src="burger.png" alt="FastFood" data-food-type-id={ctg.id}/> </> : null}
+                    {ctg.type === "کلاسیک" ? <> <img className="ctg-element-img" src="desert.png" alt="Classic" data-food-type-id={ctg.id}/> </> : null}
+                    {ctg.type === "نوشیدنی" ? <> <img className="ctg-element-img" src="drink.png" alt="Drink" data-food-type-id={ctg.id}/> </> : null}
 
-                    <div className="food-name" data-food-type={food.type}>
-                        {food.type}
+                    <div className="food-name" data-food-type-id={ctg.id} onClick={SetActiveCTG}>
+                        {ctg.type}
                    </div>
                </div>
             )
@@ -58,51 +60,42 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
     const GatherData = async () => {
         var res = await FetchFoodData();
 
-        res.filter(foodItem => {
-            if (foodItem.type === "فست فود") {
-                setfoodsToShow(foodItem.foodList)
+        var initFoodToShow = res.filter(foodItem => {
+            if (foodItem.catagoryID === 1) {
+                return foodItem
             }
         })
+
+        setfoodsToShow(initFoodToShow)
     }
 
     const FetchFoodData = async () => {
 
-        const response = await fetch('Food');
-        const result = await response.json();
-
-        console.log("RES = ", result)
         var signedInCookie = Cookies.get("signedInCookie")
         var initCookie = Cookies.get("InitCookie")
+
+        var cookieToBeSent = signedInCookie !== undefined ? JSON.parse(signedInCookie).SL : JSON.parse(initCookie).SL
+        console.log("cookieToBeSent = ", typeof JSON.stringify(cookieToBeSent), JSON.stringify(cookieToBeSent))
+
+        const response = await fetch('Food/GetFoodData')
+
+        /*const response = await fetch('Food/GetFoodData', {
+            method: "Post",
+            headers: {
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify({
+                cookieSL: cookieToBeSent
+            })
+        })*/
+        const result = await response.json();
+        console.log("Ress returned = ", result)
         
-
         if (Object.keys(props.foodList).length <= 0) {
-            
-            if (signedInCookie !== undefined) {
-                var signedInCookieVal = JSON.parse(signedInCookie)
 
-                if (signedInCookieVal.SL.length <= 0) {
+            props.GetFoodList(result.foodList, result.ctg);
 
-                    props.GetFoodList(result, [])
-
-                    return result
-                } else {
-                    props.GetFoodList(result, signedInCookieVal.SL);
-                }
-            }
-
-            if (initCookie !== undefined) {
-                var initCookieVal = JSON.parse(initCookie)
-
-                if (initCookieVal.SL.length <= 0) {
-
-                    props.GetFoodList(result, [])
-
-                    return result
-                } else {
-                    props.GetFoodList(result, initCookieVal.SL)
-                }
-            }
-
+            return result.foodList
         } else {
             return props.foodList
         }
@@ -162,9 +155,9 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
             )
         }
     }
-
+/*
     console.log("Foodlist = ", props.foodList)
-    console.log("Foods To Show = ", foodsToShow)
+    console.log("Foods To Show = ", foodsToShow)*/
 
     return (
             <Content>
@@ -174,7 +167,7 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
                     <div className="menu-div-inner">
 
                         <div className="menu-food-type" id="FoodHeader">
-                            <FoodCtgElement foods={props.foodList} setfoodsToShow={setfoodsToShow} />
+                            <FoodCtgElement foodCtg={props.foodCtg} foodList={props.foodList} setfoodsToShow={setfoodsToShow} />
                         </div>
 
                         <TransitionGroup>
@@ -196,13 +189,14 @@ function FoodMenuComp({ setjiggleButton, setshowDrawer, ...props }) {
 const mapStateToProps = (state) => {
     return {
         foodList: state.foodList,
+        foodCtg: state.foodCtg,
         shoppingList: state.shoppingList
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        GetFoodList: (foodList, cookieSL) => { dispatch({ type: "Get_FoodList", payload: { foodList, cookieSL } }) },
+        GetFoodList: (List, ctg) => { dispatch({ type: "Get_FoodList", payload: { List, ctg } }) },
         addToShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Add", payload: foodItem }) },
         removeFromShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Remove_One", payload: foodItem }) },
         UpdateStateUsingCookie: (foodsToUpdate) => { dispatch({ type: "UpdateState_UsingCookies", payload: foodsToUpdate }) }

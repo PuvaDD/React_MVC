@@ -72,16 +72,7 @@ function HomePageComp({ ...props }) {
 
     const RenderShoppingListItems = () => {
 
-        for (var i = 0; i < props.shoppingList.length; i++) {
-            if (props.shoppingList[i].quantity <= 0) {
-                var updatedList = props.shoppingList.filter(item => {
-                    if (item.id !== props.shoppingList[i].id) {
-                        return item;
-                    }
-                })
-                props.updateShoppingList(updatedList, props.shoppingList[i])
-            }
-        }
+        props.updateShoppingList()
 
         return (
             props.shoppingList.map((item, i) => {
@@ -121,10 +112,9 @@ function HomePageComp({ ...props }) {
         setshowDrawer(false)
     }
 
-/*    console.log("W = ", window.innerWidth)
-    console.log("shoppingList = ", props.shoppingList)*/
+    console.log("shoppingList = ", props.shoppingList)
     console.log("Signed In Cookie = ", Cookies.get("signedInCookie"))
-/*    console.log("INIT COOKIE = ", Cookies.get("InitCookie"))*/
+    console.log("INIT COOKIE = ", Cookies.get("InitCookie"))
 
     return (
         <Content className="home-content">
@@ -229,7 +219,7 @@ const mapDispatchToProps = (dispatch) => {
         AddOneToShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Btn_Add", payload: foodItem }) },
         RemoveItemFromShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Remove", payload: foodItem }) },
         RemoveOneFromShoppingList: (foodItem) => { dispatch({ type: "ShoppingList_Btn_Remove", payload: foodItem }) },
-        updateShoppingList: (updatedList, foodItemToRemove) => { dispatch({ type: "ShoppingList_Update", payload: { updatedList, foodItemToRemove } }) }
+        updateShoppingList: () => { dispatch({ type: "ShoppingList_Update" }) }
     }
 }
 
